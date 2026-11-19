@@ -1,4 +1,4 @@
-# nhanes-oral-health-diabetes# Oral health and diabetes in US adults (NHANES 2013-2014)
+# Oral health and diabetes in US adults (NHANES 2013-2014)
 
 Personal learning project exploring whether simple oral health measures
 add information to a diabetes prediction model.
