@@ -27,9 +27,8 @@ Source: https://wwwn.cdc.gov/nchs/nhanes/
 - Adding oral health variables raised the mean AUC by only 0.005 (0.726 to 0.731), much less than the variation between folds (SD 0.024).I therefore cannot conclude that tooth counts improve prediction beyond age, sex and BMI.
 - On a single 80/20 split, test AUC was 0.774, but this is based on about 105
   cases and is less reliable than the cross-validated estimate.
-- At a cut-off equal to the overall prevalence (0.127), sensitivity was 0.77 and
-  specificity 0.67.At the usual 0.5 cut-off, sensitivity was only 0.03 (specificity 0.997). Only about 12.7% of people have diabetes, so the model rarely estimates a risk above 50% and labelled almost everyone as not having diabetes. Lowering the cut-off to the overall prevalence (0.127) raised sensitivity to 0.77 and lowered specificity to 0.67. The model is the same; the cut-off sets the balance between missed cases and false alarms.
-- People with diabetes had fewer natural teeth on average (17.6 vs 21.2) but were also older (60.8 vs 53.0 years).People with diabetes had fewer natural teeth (17.6 vs 21.2) but were also older (60.8 vs 53.0 years). Older age is linked to both tooth loss and diabetes, so age is a confounder and the raw difference in teeth partly reflects age. Including age in the model accounts for part of this, but not all of it.
+- At the usual 0.5 cut-off, sensitivity was only 0.03 (specificity 0.997). Only about 12.7% of people have diabetes, so the model rarely estimates a risk above 50% and labelled almost everyone as not having diabetes. Lowering the cut-off to the overall prevalence (0.127) raised sensitivity to 0.77 and lowered specificity to 0.67. The model is the same; the cut-off sets the balance between missed cases and false alarms.
+- People with diabetes had fewer natural teeth on average (17.6 vs 21.2) but were also older (60.8 vs 53.0 years). Older age is linked to both tooth loss and diabetes, so age is a confounder and the raw difference in teeth partly reflects age. Including age in the model accounts for part of this, but not all of it.
 
 ## Limitations
 - Cross-sectional data: this shows association, not early detection or causation.
@@ -46,8 +45,10 @@ Source: https://wwwn.cdc.gov/nchs/nhanes/
 Add periodontal measures (pocket depth, attachment loss) and compare models.
 
 ## How to run
-Open the notebook in Google Cola and choose Runtime > Run all.
-It downloads the data itself.
-Sharanya Sreekumar, Master in public health dentistry, to gain experience in training and validation of models.
-Python and scikit-learn guidance was supported by an AI assistant (Claude).
+Open the notebook in Google Colab and choose Runtime > Run all. It downloads the data itself.
+
+## About
+Dr Sharanya Sreekumar, BDS, MDS (Public Health Dentistry). I built this project to gain practical experience in training and validating prediction models. Python and scikit-learn guidance was supported by an AI assistant (Claude). All analysis decisions and interpretations were reviewed and explained by me.
+
+
 All analysis decisions and interpretations were reviewed and explained by me.
