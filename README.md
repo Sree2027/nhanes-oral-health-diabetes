@@ -19,18 +19,17 @@ Source: https://wwwn.cdc.gov/nchs/nhanes/
   dental disease, decayed teeth.
 - HbA1c was NOT used as a predictor, to avoid data leakage.
 - Model: logistic regression (scikit-learn).
-- Validation: [explain in your own words: 80/20 split and 5-fold cross-validation, and why].
+- Validation:the data were split 80/20 into training and test sets (stratified, so both kept the same share of diabetes cases). The model learned from the training set only and was scored on the test set, which it had not seen. Because a single split can be lucky or unlucky, I also used 5-fold cross-validation, which trains and tests the model five times on different parts of the data and averages the AUC.
 
 ## Results
 - Age, sex, BMI only: mean AUC 0.726 (SD 0.024, 5-fold cross-validation).
 - Adding oral health variables: mean AUC 0.731 (SD 0.024).
-- [Your interpretation: the gain was small and within the fold-to-fold variation.]
+- Adding oral health variables raised the mean AUC by only 0.005 (0.726 to 0.731), much less than the variation between folds (SD 0.024).I therefore cannot conclude that tooth counts improve prediction beyond age, sex and BMI.
 - On a single 80/20 split, test AUC was 0.774, but this is based on about 105
   cases and is less reliable than the cross-validated estimate.
 - At a cut-off equal to the overall prevalence (0.127), sensitivity was 0.77 and
-  specificity 0.67. [Explain why the default 0.5 cut-off gave sensitivity of only 0.03.]
-- People with diabetes had fewer natural teeth on average (17.6 vs 21.2) but
-  were also older (60.8 vs 53.0 years). [Explain why age matters here.]
+  specificity 0.67.At the usual 0.5 cut-off, sensitivity was only 0.03 (specificity 0.997). Only about 12.7% of people have diabetes, so the model rarely estimates a risk above 50% and labelled almost everyone as not having diabetes. Lowering the cut-off to the overall prevalence (0.127) raised sensitivity to 0.77 and lowered specificity to 0.67. The model is the same; the cut-off sets the balance between missed cases and false alarms.
+- People with diabetes had fewer natural teeth on average (17.6 vs 21.2) but were also older (60.8 vs 53.0 years).People with diabetes had fewer natural teeth (17.6 vs 21.2) but were also older (60.8 vs 53.0 years). Older age is linked to both tooth loss and diabetes, so age is a confounder and the raw difference in teeth partly reflects age. Including age in the model accounts for part of this, but not all of it.
 
 ## Limitations
 - Cross-sectional data: this shows association, not early detection or causation.
@@ -40,8 +39,8 @@ Source: https://wwwn.cdc.gov/nchs/nhanes/
 - Natural teeth and teeth lost overlap, so their coefficients should not be
   interpreted separately.
 - About 350 people with missing data were excluded.
-- [for example, the periodontal exam excluded some people with
-  heart conditions.]
+- - Only tooth-count variables were used; gum disease measures from the periodontal exam were not analysed.
+- Results come from a single NHANES cycle (2013-2014), odds ratios are crude (no confidence intervals), and the model was not tested on a separate dataset.
 
 ## Next steps
 Add periodontal measures (pocket depth, attachment loss) and compare models.
@@ -49,6 +48,6 @@ Add periodontal measures (pocket depth, attachment loss) and compare models.
 ## How to run
 Open the notebook in Google Cola and choose Runtime > Run all.
 It downloads the data itself.
-[Your name, background in public health dentistry, one line on why you did this.]
+Sharanya Sreekumar, Master in public health dentistry, to gain experience in training and validation of models.
 Python and scikit-learn guidance was supported by an AI assistant (Claude).
 All analysis decisions and interpretations were reviewed and explained by me.
